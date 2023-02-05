@@ -9,7 +9,7 @@
 </head>
 <body>
 <script>
-   var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+   var game = new Phaser.Game(720, 1280, Phaser.AUTO, null, {preload: preload, create: create, update: update});
 
 var ball;
 var paddle;
@@ -25,7 +25,7 @@ let playing = false;
 let startButton;
 
 function preload() {
-    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.scaleMode = Phaser.ScaleManager.FIT;
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
     game.stage.backgroundColor = '#eee';
@@ -54,7 +54,7 @@ function create() {
 
     initBricks();
 
-    textStyle = { font: '18px Arial', fill: '#0095DD' };
+    textStyle = { font: '36px Arial', fill: '#0095DD' };
     scoreText = game.add.text(5, 5, 'Points: 0', textStyle);
     livesText = game.add.text(game.world.width-5, 5, 'Lives: '+lives, textStyle);
     livesText.anchor.set(1,0);
@@ -85,22 +85,22 @@ function update() {
 
 function startGame() {
   startButton.destroy();
-  ball.body.velocity.set(150, -150);
+  ball.body.velocity.set(150*2, -150*2);
   playing = true;
 }
 
 
 function initBricks() {
     brickInfo = {
-        width: 50,
-        height: 20,
+        width: 50*2,
+        height: 20*2,
         count: {
-            row: 7,
-            col: 3
+            row: 6,
+            col: 6
         },
         offset: {
-            top: 50,
-            left: 60
+            top: 70,
+            left: 100
         },
         padding: 10
     }
@@ -146,7 +146,7 @@ function ballLeaveScreen() {
         paddle.reset(game.world.width*0.5, game.world.height-5);
         game.input.onDown.addOnce(function(){
             lifeLostText.visible = false;
-            ball.body.velocity.set(150, -150);
+            ball.body.velocity.set(150*2, -150*2);
         }, this);
     }
     else {
